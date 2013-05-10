@@ -38,7 +38,11 @@ public class LegacyPermissionAnnotationHandler extends AuthorizingAnnotationHand
             }
         }
         catch (Exception ex) {
-            throw new RuntimeException(ex);
+			if(ex instanceof UnauthorizedException){
+				throw ex;
+			}else{
+				throw new RuntimeException(ex);
+			}
         }
     }
 }
