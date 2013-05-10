@@ -38,6 +38,7 @@ public class LegacyPermissionAnnotationHandler extends AuthorizingAnnotationHand
             }
         }
         catch (Exception ex) {
+			//fixed by skylovers, rethrow UnauthorizedException
 			if(ex instanceof UnauthorizedException){
 				throw ex;
 			}else{
