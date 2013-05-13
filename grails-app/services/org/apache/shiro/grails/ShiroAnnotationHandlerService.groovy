@@ -60,8 +60,10 @@ class ShiroAnnotationHandlerService implements InitializingBean {
             }
         }
 
-        // Next, we go through the controller's fields
-        clazz.declaredFields.each { field ->
+        // Next, we go through the controller's fields and methods
+		def fields = clazz.declaredFields
+		def methods = clazz.declaredMethods
+        def eachClosure  ={ field ->
             // At the start, this field uses the class annotation handlers.
             def authcHandler = authcClassHandler
             def authzHandler = authzClassHandler
@@ -93,5 +95,7 @@ class ShiroAnnotationHandlerService implements InitializingBean {
                 handlerMap[handlerKey] << new AnnotationHandler(*authzHandler)
             }
         }
+		fields.each(eachClosure)
+		methods.each(eachClosure)
     }
 }

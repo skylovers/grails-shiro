@@ -37,13 +37,12 @@ public class LegacyPermissionAnnotationHandler extends AuthorizingAnnotationHand
                 throw new UnauthorizedException(msg);
             }
         }
+		//fixed by skylovers, rethrow UnauthorizedException
+		catch(UnauthorizedException ex){
+			throw ex;
+		}
         catch (Exception ex) {
-			//fixed by skylovers, rethrow UnauthorizedException
-			if(ex instanceof UnauthorizedException){
-				throw ex;
-			}else{
-				throw new RuntimeException(ex);
-			}
+			throw new RuntimeException(ex);
         }
     }
 }
