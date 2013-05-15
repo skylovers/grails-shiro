@@ -83,7 +83,9 @@ class ShiroAnnotationHandlerService implements InitializingBean {
             // Create combined annotations + handlers where required and add
             // them to the handler map.
             def handlerKey = controllerClass.logicalPropertyName + ":" + field.name
-            handlerMap[handlerKey] = []
+			if(handlerMap[handlerKey] == null){
+				handlerMap[handlerKey] = []
+			}
 
             if (authcHandler) {
                 // Neat trick: we spread the annotation/handler pairs to form
